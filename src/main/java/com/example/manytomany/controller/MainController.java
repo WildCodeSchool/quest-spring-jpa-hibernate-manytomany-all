@@ -10,9 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 public class MainController {
 
@@ -24,28 +21,25 @@ public class MainController {
 
     @GetMapping("/init")
     @ResponseBody
-    public List<Student> init() {
+    public String init() {
 
         studentRepository.deleteAll();
         schoolRepository.deleteAll();
 
         School toulouse = schoolRepository.save(new School("Toulouse"));
         School bordeaux = schoolRepository.save(new School("Bordeaux"));
-        School lyon = schoolRepository.save(new School("Lyon"));
 
-        List<Student> students = new ArrayList<>();
         Student charlie = studentRepository.save(new Student("Charlie"));
-        Student louison = studentRepository.save(new Student("Louison"));
-        Student camille = studentRepository.save(new Student("Camille"));
-        Student andrea = studentRepository.save(new Student("Andréa"));
-        students.add(charlie);
-        students.add(louison);
-        students.add(camille);
-        students.add(andrea);
 
         charlie.getSchoolStudents().add(new SchoolStudent(toulouse, charlie));
-        studentRepository.save(charlie);
+        charlie.getSchoolStudents().add(new SchoolStudent(bordeaux, charlie));
+        charlie = studentRepository.save(charlie);
 
-        return students;
+        String result = charlie.getName() + ":\n";
+        for (SchoolStudent schoolStudent : charlie.getSchoolStudents()) {
+            result += "- " + schoolStudent.getSchool().getAddress() + "\n";
+        }
+
+        return result;
     }
 }

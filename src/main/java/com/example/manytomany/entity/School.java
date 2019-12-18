@@ -1,7 +1,5 @@
 package com.example.manytomany.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +14,6 @@ public class School {
     private String address;
 
     @OneToMany(mappedBy = "school", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<SchoolStudent> schoolStudents = new ArrayList<>();
 
     public School() {
