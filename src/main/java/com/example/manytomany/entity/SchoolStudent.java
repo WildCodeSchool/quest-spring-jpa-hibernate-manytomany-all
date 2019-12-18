@@ -6,16 +6,16 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@IdClass(SchoolStudentId.class)
 public class SchoolStudent {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-
     @ManyToOne
     @JoinColumn(name = "school_id")
+    @JsonIgnore
     private School school;
 
+    @Id
     @ManyToOne
     @JoinColumn(name = "student_id")
     @JsonIgnore
@@ -29,15 +29,7 @@ public class SchoolStudent {
     public SchoolStudent(School school, Student student) {
         this.school = school;
         this.student = student;
-        inscription = new Date();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.inscription = new Date();
     }
 
     public School getSchool() {
