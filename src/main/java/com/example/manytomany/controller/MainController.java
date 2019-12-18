@@ -7,6 +7,7 @@ import com.example.manytomany.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
@@ -18,10 +19,11 @@ public class MainController {
     private StudentRepository studentRepository;
 
     @GetMapping("/init")
+    @ResponseBody
     public String init() {
 
-        schoolRepository.deleteAll();
         studentRepository.deleteAll();
+        schoolRepository.deleteAll();
 
         School toulouse = schoolRepository.save(new School("Toulouse"));
         School bordeaux = schoolRepository.save(new School("Bordeaux"));
@@ -29,6 +31,6 @@ public class MainController {
 
         Student charlie = studentRepository.save(new Student("Charlie"));
 
-        return "data initialized";
+        return charlie.getName();
     }
 }
