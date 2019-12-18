@@ -1,7 +1,5 @@
 package com.example.manytomany.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +13,8 @@ public class School {
 
     private String address;
 
-    @ManyToMany(mappedBy = "schools")
-    @JsonIgnore
-    private List<Student> students = new ArrayList<>();
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL)
+    private List<SchoolStudent> schoolStudents = new ArrayList<>();
 
     public School() {
     }
@@ -42,11 +39,11 @@ public class School {
         this.address = address;
     }
 
-    public List<Student> getStudents() {
-        return students;
+    public List<SchoolStudent> getSchoolStudents() {
+        return schoolStudents;
     }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
+    public void setSchoolStudents(List<SchoolStudent> schoolStudents) {
+        this.schoolStudents = schoolStudents;
     }
 }
