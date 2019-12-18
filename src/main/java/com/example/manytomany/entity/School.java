@@ -1,9 +1,8 @@
 package com.example.manytomany.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class School {
@@ -13,6 +12,9 @@ public class School {
     Long id;
 
     private String address;
+
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SchoolStudent> schoolStudents = new ArrayList<>();
 
     public School() {
     }
@@ -35,5 +37,13 @@ public class School {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public List<SchoolStudent> getSchoolStudents() {
+        return schoolStudents;
+    }
+
+    public void setSchoolStudents(List<SchoolStudent> schoolStudents) {
+        this.schoolStudents = schoolStudents;
     }
 }
