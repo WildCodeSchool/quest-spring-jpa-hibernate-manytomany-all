@@ -37,7 +37,9 @@ public class MainController {
 
         String result = charlie.getName() + ":\n";
         for (SchoolStudent schoolStudent : charlie.getSchoolStudents()) {
-            result += "- " + schoolStudent.getSchool().getAddress() + "\n";
+            result += "- " + schoolStudent.getSchool().getAddress()
+                    + ", " + schoolStudent.getInscription()
+                    + "\n";
         }
 
         return result;
