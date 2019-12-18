@@ -1,6 +1,7 @@
 package com.example.manytomany.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class SchoolStudent {
@@ -18,6 +19,8 @@ public class SchoolStudent {
     @JoinColumn(name = "student_id")
     private Student student;
 
+    private Date inscription;
+
     public SchoolStudent() {
     }
 
@@ -25,6 +28,7 @@ public class SchoolStudent {
         this.id = new SchoolStudentId(school.getId(), student.getId());
         this.school = school;
         this.student = student;
+        this.inscription = new Date();
     }
 
     public SchoolStudentId getId() {
@@ -49,5 +53,13 @@ public class SchoolStudent {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public Date getInscription() {
+        return inscription;
+    }
+
+    public void setInscription(Date inscription) {
+        this.inscription = inscription;
     }
 }
