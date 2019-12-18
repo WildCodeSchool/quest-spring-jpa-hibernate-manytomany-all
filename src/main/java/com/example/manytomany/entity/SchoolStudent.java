@@ -1,7 +1,5 @@
 package com.example.manytomany.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -18,7 +16,6 @@ public class SchoolStudent {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
-    @JsonIgnore
     private Student student;
 
     private Date inscription;
