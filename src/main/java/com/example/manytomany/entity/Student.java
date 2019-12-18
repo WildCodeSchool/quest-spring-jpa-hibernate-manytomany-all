@@ -14,7 +14,7 @@ public class Student {
     private String name;
 
     @ManyToMany
-    @JoinTable(name = "student_school",
+    @JoinTable(name = "school_student",
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "school_id"))
     private List<School> schools = new ArrayList<>();
