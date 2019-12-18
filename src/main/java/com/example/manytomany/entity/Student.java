@@ -13,15 +13,6 @@ public class Student {
 
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "student_school",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "school_id"))
-    private List<School> schools = new ArrayList<>();
-
-    public Student() {
-    }
-
     public Student(String name) {
         this.name = name;
     }
@@ -40,13 +31,5 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<School> getSchools() {
-        return schools;
-    }
-
-    public void setSchools(List<School> schools) {
-        this.schools = schools;
     }
 }
