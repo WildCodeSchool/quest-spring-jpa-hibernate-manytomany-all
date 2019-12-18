@@ -26,7 +26,7 @@ public class SchoolStudent {
     public SchoolStudent(School school, Student student) {
         this.school = school;
         this.student = student;
-        inscription = new Date();
+        this.inscription = new Date();
     }
 
     public Long getId() {
