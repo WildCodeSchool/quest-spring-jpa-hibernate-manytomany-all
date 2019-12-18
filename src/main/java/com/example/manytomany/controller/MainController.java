@@ -1,7 +1,6 @@
 package com.example.manytomany.controller;
 
 import com.example.manytomany.entity.School;
-import com.example.manytomany.entity.SchoolStudent;
 import com.example.manytomany.entity.Student;
 import com.example.manytomany.repository.SchoolRepository;
 import com.example.manytomany.repository.StudentRepository;
@@ -26,8 +25,8 @@ public class MainController {
     @ResponseBody
     public List<Student> init() {
 
-        studentRepository.deleteAll();
         schoolRepository.deleteAll();
+        studentRepository.deleteAll();
 
         School toulouse = schoolRepository.save(new School("Toulouse"));
         School bordeaux = schoolRepository.save(new School("Bordeaux"));
@@ -43,8 +42,21 @@ public class MainController {
         students.add(camille);
         students.add(andrea);
 
-        charlie.getSchoolStudents().add(new SchoolStudent(toulouse, charlie));
-        studentRepository.save(charlie);
+        charlie.getSchools().add(toulouse);
+        toulouse.getStudents().add(charlie);
+        camille.getSchools().add(toulouse);
+        toulouse.getStudents().add(camille);
+        schoolRepository.save(toulouse);
+        louison.getSchools().add(bordeaux);
+        bordeaux.getStudents().add(louison);
+        camille.getSchools().add(bordeaux);
+        bordeaux.getStudents().add(camille);
+        schoolRepository.save(bordeaux);
+        louison.getSchools().add(lyon);
+        lyon.getStudents().add(louison);
+        andrea.getSchools().add(lyon);
+        lyon.getStudents().add(andrea);
+        schoolRepository.save(lyon);
 
         return students;
     }

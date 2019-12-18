@@ -15,9 +15,9 @@ public class School {
 
     private String address;
 
-    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "schools")
     @JsonIgnore
-    private List<SchoolStudent> schoolStudents = new ArrayList<>();
+    private List<Student> students = new ArrayList<>();
 
     public School() {
     }
@@ -42,11 +42,11 @@ public class School {
         this.address = address;
     }
 
-    public List<SchoolStudent> getSchoolStudents() {
-        return schoolStudents;
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public void setSchoolStudents(List<SchoolStudent> schoolStudents) {
-        this.schoolStudents = schoolStudents;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }

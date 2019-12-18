@@ -13,8 +13,11 @@ public class Student {
 
     private String name;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-    private List<SchoolStudent> schoolStudents = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "student_school",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "school_id"))
+    private List<School> schools = new ArrayList<>();
 
     public Student() {
     }
@@ -39,11 +42,11 @@ public class Student {
         this.name = name;
     }
 
-    public List<SchoolStudent> getSchoolStudents() {
-        return schoolStudents;
+    public List<School> getSchools() {
+        return schools;
     }
 
-    public void setSchoolStudents(List<SchoolStudent> schoolStudents) {
-        this.schoolStudents = schoolStudents;
+    public void setSchools(List<School> schools) {
+        this.schools = schools;
     }
 }
